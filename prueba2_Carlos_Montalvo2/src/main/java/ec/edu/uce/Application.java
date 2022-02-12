@@ -14,9 +14,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ec.edu.uce.modelo.jpa.CitaMedica;
+import ec.edu.uce.modelo.jpa.CitaSimple;
 import ec.edu.uce.modelo.jpa.Doctor;
 import ec.edu.uce.modelo.jpa.Paciente;
 import ec.edu.uce.service.IDoctorService;
+import ec.edu.uce.service.IGestorCitasMedicasService;
+import ec.edu.uce.service.IPacienteService;
 
 
 @SpringBootApplication
@@ -25,7 +29,7 @@ public class Application implements CommandLineRunner{
 	private static final Logger LOG= LogManager.getLogger(Application.class);
 	
 	@Autowired
-	private IDoctorService docService;
+	private IGestorCitasMedicasService gestorService;
 
 	
 	public static void main(String[] args) {
@@ -54,8 +58,8 @@ public class Application implements CommandLineRunner{
 		doc2.setCodigoSenescyt("asdqw114124");
 		doc2.setSueldo(new BigDecimal(1200.00));
 		
-		docService.InsertarDoctorService(doc1);
-		docService.InsertarDoctorService(doc1);
+		gestorService.ingresarDoctor(doc2);
+		gestorService.ingresarDoctor(doc1);
 		
 		Paciente pac1=new Paciente();
 		pac1.setCedula("12141244");
@@ -78,8 +82,32 @@ public class Application implements CommandLineRunner{
 		pac2.setEstatura(155);
 		pac2.setPeso(60);
 		pac2.setEdad(30);
-
 		
+		gestorService.ingresarPaciente(pac2);
+		gestorService.ingresarPaciente(pac1);
+
+		CitaSimple cis=new CitaSimple();
+		cis.setNumero(235);
+		LocalDateTime mifecha5=LocalDateTime.of(2022, Month.JULY,7,4,15);
+		cis.setFechaCita(mifecha5);
+		cis.setValorCita(new BigDecimal(20.50));
+		cis.setLugarCita("Clinica Quito");
+		//cis.setDoctor(doc2);
+		//cis.setPaciente(pac2);
+		
+		//gestorService.ingresarCitaSimple(cis);
+		
+		CitaMedica cit=new CitaMedica();
+		cit.setNumero(235);
+		LocalDateTime mifecha0=LocalDateTime.of(2022, Month.JULY,7,4,15);
+		cit.setFechaCita(mifecha0);
+		cit.setValorCita(new BigDecimal(20.50));
+		cit.setLugarCita("Clinica Quito");
+		cit.setDiagnostico("Se va a morir");
+		cit.setReceta("descanzo en paz");
+		
+		cit.setDoctor(doc2);
+		cit.setPaciente(pac2);
 	}
 
 }
