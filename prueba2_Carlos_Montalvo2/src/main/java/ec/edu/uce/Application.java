@@ -1,0 +1,85 @@
+package ec.edu.uce;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import ec.edu.uce.modelo.jpa.Doctor;
+import ec.edu.uce.modelo.jpa.Paciente;
+import ec.edu.uce.service.IDoctorService;
+
+
+@SpringBootApplication
+public class Application implements CommandLineRunner{
+	
+	private static final Logger LOG= LogManager.getLogger(Application.class);
+	
+	@Autowired
+	private IDoctorService docService;
+
+	
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+	@Override
+	public void run(String... args) throws Exception {
+		
+		Doctor doc1=new Doctor();
+		doc1.setCedula("11532435563");
+		doc1.setNombre("Enrique");
+		doc1.setApellido("Garcia");
+		LocalDateTime mifecha=LocalDateTime.of(1999, Month.AUGUST,8,12,45);
+		doc1.setFechaNacimiento(mifecha);
+		doc1.setNumeroConsultorio(12);
+		doc1.setCodigoSenescyt("1244364saf");
+		doc1.setSueldo(new BigDecimal(1400.00));
+		
+		Doctor doc2=new Doctor();
+		doc2.setCedula("34645433455");
+		doc2.setNombre("Alejandra");
+		doc2.setApellido("Correa");
+		LocalDateTime mifecha2=LocalDateTime.of(1985, Month.DECEMBER,7,4,15);
+		doc2.setFechaNacimiento(mifecha2);
+		doc2.setNumeroConsultorio(10);
+		doc2.setCodigoSenescyt("asdqw114124");
+		doc2.setSueldo(new BigDecimal(1200.00));
+		
+		docService.InsertarDoctorService(doc1);
+		docService.InsertarDoctorService(doc1);
+		
+		Paciente pac1=new Paciente();
+		pac1.setCedula("12141244");
+		pac1.setNombre("Julio");
+		pac1.setApellido("Arboleda");
+		LocalDateTime mifecha3=LocalDateTime.of(1965, Month.JUNE,7,4,15);
+		pac1.setFecha_nacimiento(mifecha3);
+		pac1.setCodigoIess("f12235");
+		pac1.setEstatura(175);
+		pac1.setPeso(80);
+		pac1.setEdad(55);
+		
+		Paciente pac2=new Paciente();
+		pac2.setCedula("1245132");
+		pac2.setNombre("Maria");
+		pac2.setApellido("Garces");
+		LocalDateTime mifecha4=LocalDateTime.of(1990, Month.JULY,7,4,15);
+		pac2.setFecha_nacimiento(mifecha4);
+		pac2.setCodigoIess("sdssgs2322");
+		pac2.setEstatura(155);
+		pac2.setPeso(60);
+		pac2.setEdad(30);
+
+		
+	}
+
+}
