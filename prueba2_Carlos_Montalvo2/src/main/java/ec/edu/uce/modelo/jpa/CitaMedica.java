@@ -1,7 +1,6 @@
 package ec.edu.uce.modelo.jpa;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
