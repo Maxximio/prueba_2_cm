@@ -12,4 +12,6 @@ public interface IDoctorService {
 	
 	void borrarDoctorService(Integer id);
 	
+	Doctor buscarDoctorApellidoService(String apell);
+	
 }

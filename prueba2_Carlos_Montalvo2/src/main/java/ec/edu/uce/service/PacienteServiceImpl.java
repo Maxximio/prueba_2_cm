@@ -32,4 +32,9 @@ public class PacienteServiceImpl implements IPacienteService{
 		this.paciRepo.borrarDoctor(id);
 	}
 
+	@Override
+	public Paciente buscarPacienteCodSeguroService(String codigoIess) {
+		return this.paciRepo.buscarPacienteCodSeguro(codigoIess);
+	}
+
 }

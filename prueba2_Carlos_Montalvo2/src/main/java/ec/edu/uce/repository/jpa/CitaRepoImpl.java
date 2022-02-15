@@ -11,7 +11,7 @@ import ec.edu.uce.modelo.jpa.CitaSimple;
 
 @Repository
 @Transactional
-public class CitaRepoImpl implements ICitaMedicaRepo{
+public class CitaRepoImpl implements ICitaRepo{
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -22,8 +22,24 @@ public class CitaRepoImpl implements ICitaMedicaRepo{
 	}
 
 	@Override
-	public void ActualizarCita(CitaMedica cita) {
-		
+	public void InsertarCitaMedica(CitaMedica cita) {
+		this.entityManager.persist(cita);
+	}
+
+	@Override
+	public CitaMedica buscarCitaMedica(Integer id) {
+		return this.entityManager.find(CitaMedica.class, id);
+	}
+
+	@Override
+	public void ActualizarCitaMedica(CitaMedica cita) {
+		this.entityManager.merge(cita);
+	}
+
+	@Override
+	public void borrarCitaMedica(Integer id) {
+		CitaMedica citaBorrar=this.buscarCitaMedica(id);
+		this.entityManager.remove(citaBorrar);
 	}
 
 	

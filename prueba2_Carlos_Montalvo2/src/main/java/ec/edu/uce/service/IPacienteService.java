@@ -11,4 +11,6 @@ public interface IPacienteService {
 	void ActualizarPacienteService(Paciente paci);
 	
 	void borrarDoctorService(Integer id);
+	
+	Paciente buscarPacienteCodSeguroService(String codigoIess);
 }

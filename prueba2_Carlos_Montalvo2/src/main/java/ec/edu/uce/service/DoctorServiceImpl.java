@@ -31,5 +31,10 @@ public class DoctorServiceImpl implements IDoctorService{
 	public void borrarDoctorService(Integer id) {
 		this.docRepo.borrarDoctor(id);
 	}
+
+	@Override
+	public Doctor buscarDoctorApellidoService(String apell) {
+		return this.docRepo.buscarDoctorApellido(apell);
+	}
 	
 }

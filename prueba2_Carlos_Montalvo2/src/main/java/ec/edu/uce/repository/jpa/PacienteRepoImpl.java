@@ -1,9 +1,13 @@
 package ec.edu.uce.repository.jpa;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.modelo.jpa.Paciente;
@@ -11,6 +15,8 @@ import ec.edu.uce.modelo.jpa.Paciente;
 @Repository
 @Transactional
 public class PacienteRepoImpl implements IPacienteRepo{
+
+	private static final Logger LOG= LogManager.getLogger(PacienteRepoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -34,6 +40,20 @@ public class PacienteRepoImpl implements IPacienteRepo{
 	public void borrarDoctor(Integer id) {
 		Paciente pacieteBorrar=this.buscarPaciente(id);
 		this.entityManager.remove(pacieteBorrar);
+	}
+
+	@Override
+	public Paciente buscarPacienteCodSeguro(String codigoIess) {
+		Paciente g=null;
+		try {
+		Query miQuery= this.entityManager.createQuery("select p from Paciente p where p.codigoIess=:valor");
+		miQuery.setParameter("valor", codigoIess);
+		
+		 g=(Paciente) miQuery.getSingleResult();
+	}catch(NoResultException e) {
+		LOG.error("No existe un resultado para: "+codigoIess,e);
+	}	
+		return g;
 	}
 
 }

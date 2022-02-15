@@ -12,4 +12,6 @@ public interface IDoctorRepo {
 	
 	void borrarDoctor(Integer id);
 	
+	Doctor buscarDoctorApellido(String apell);
+	
 }
