@@ -31,10 +31,10 @@ public class PacienteServiceImpl implements IPacienteService{
 	public void borrarDoctorService(Integer id) {
 		this.paciRepo.borrarDoctor(id);
 	}
-
+	
 	@Override
-	public Paciente buscarPacienteCodSeguroService(String codigoIess) {
-		return this.paciRepo.buscarPacienteCodSeguro(codigoIess);
+	public Paciente buscarPacienteCedulaService(String ced) {
+		return this.paciRepo.buscarPacienteCedula(ced);
 	}
 
 }

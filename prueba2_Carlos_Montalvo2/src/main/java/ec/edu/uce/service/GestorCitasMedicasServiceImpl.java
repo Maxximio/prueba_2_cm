@@ -28,7 +28,11 @@ public class GestorCitasMedicasServiceImpl implements IGestorCitasMedicasService
 	private IDoctorService docService;
 	
 	@Autowired
-	private ICitaRepo citaService;
+	private ICitaService citaService;
+	
+	
+	
+	
 	
 	@Override
 	public void ingresarDoctor(Doctor doc) {
@@ -42,7 +46,7 @@ public class GestorCitasMedicasServiceImpl implements IGestorCitasMedicasService
 
 	@Override
 	public void ingresarCitaSimple(CitaSimple cisi) {
-		this.citaService.insertCitaSimple(cisi);
+		this.citaService.insertCitaSimpleService(cisi);
 	}
 
 	@Override
@@ -57,40 +61,45 @@ public class GestorCitasMedicasServiceImpl implements IGestorCitasMedicasService
 
 	@Override
 	public Paciente buscarPacienteCodSeguro(String codigoIess) {
-		return this.pacService.buscarPacienteCodSeguroService(codigoIess);
+		return this.pacService.buscarPacienteCedulaService(codigoIess);
 	}
 
 	@Override
 	public Doctor buscarDoctorApellido(String apellido) {
-		return this.docService.buscarDoctorApellidoService(apellido);
+		return this.docService.buscarDoctorCedulaService(apellido);
 	}
 
 	@Override
-	public void AgendarCita(Integer num, LocalDateTime fecha, BigDecimal valor, String lugar, String apellidoDoctor,
-			String CodSeguroPaciente) {
-		CitaMedica cit=new CitaMedica();//mayor a la fecha actual osino imprimir un warn
-		cit.setNumero(num);//el valor debe aumentar un 12%
-		LocalDateTime miFechaActual=LocalDateTime.now();
-		int diferencia= fecha.compareTo(miFechaActual);
-		if(diferencia<0) {
-			LOG.warn("El valor de la fecha ingresada no es correcto");
-		}
-		cit.setFechaCita(fecha);
-		BigDecimal b2 = new BigDecimal("0.12");
-		BigDecimal b3 = valor.multiply(b2);
-		cit.setValorCita(b3);
-		cit.setLugarCita(lugar);
-		cit.setDiagnostico("Se va a morir");
-		cit.setReceta("descanzo en paz");
-		cit.setDoctor(this.docService.buscarDoctorApellidoService(apellidoDoctor));
-		cit.setPaciente(this.pacService.buscarPacienteCodSeguroService(CodSeguroPaciente));
+	public void AgendarCita(Integer num, LocalDateTime fecha, BigDecimal valor, String lugar, String cedulaDoctor,
+			String cedulaPaciente) {
 		
-		this.citaService.InsertarCitaMedica(cit);
+		Paciente p1=this.pacService.buscarPacienteCedulaService(cedulaPaciente);
+		Doctor d1=this.docService.buscarDoctorCedulaService(cedulaDoctor);
+		
+		CitaMedica cit=new CitaMedica();
+		cit.setNumero(num);
+		cit.setFechaCita(fecha);
+		cit.setValorCita(valor);
+		cit.setLugarCita(lugar);
+		cit.setPaciente(p1);
+		cit.setDoctor(d1);
+		
+		this.citaService.InsertarCitaMedicaService(cit);
 	}
 
 	@Override
 	public void ingresarCitaMedica(CitaMedica cita) {
-		this.citaService.InsertarCitaMedica(cita);
+		this.citaService.InsertarCitaMedicaService(cita);
+	}
+
+	@Override
+	public void ActualizarCitas(Integer numero, String diagnostico, String receta, LocalDateTime fechaProx) {
+		CitaMedica cit=citaService.buscarPorNumeroService(numero);
+		cit.setDiagnostico(diagnostico);
+		cit.setReceta(receta);
+		cit.setFechaControl(fechaProx);
+		
+		this.citaService.ActualizarCitaMedicaService(cit);
 	}
 
 }

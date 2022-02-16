@@ -14,4 +14,6 @@ public interface ICitaService {
 	void ActualizarCitaMedicaService(CitaMedica cita);
 	
 	void borrarCitaMedicaService(Integer id);
+	
+	CitaMedica buscarPorNumeroService(Integer num);
 }

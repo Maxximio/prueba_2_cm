@@ -26,6 +26,8 @@ public interface IGestorCitasMedicasService {
 	
 	void ingresarCitaMedica(CitaMedica cita); 
 	
-	void AgendarCita(Integer num,LocalDateTime fecha,BigDecimal valor, String lugar,String apellidoDoctor, String CodSeguroPaciente);
+	void AgendarCita(Integer num,LocalDateTime fecha,BigDecimal valor, String lugar,String cedulaDoctor, String cedulaPaciente);
+	
+	void ActualizarCitas(Integer numero,String diagnostico,String receta,LocalDateTime fechaProx);
 	
 }

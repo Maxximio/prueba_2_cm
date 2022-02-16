@@ -43,15 +43,15 @@ public class DoctorRepoImpl implements IDoctorRepo{
 	}
 
 	@Override
-	public Doctor buscarDoctorApellido(String apell) {
+	public Doctor buscarDoctorCedula(String ced) {
 		Doctor g=null;
 		try {
-		Query miQuery= this.entityManager.createQuery("select d from Doctor d where d.apellido=:valor");
-		miQuery.setParameter("valor", apell);
+		Query miQuery= this.entityManager.createQuery("select d from Doctor d where d.cedula=:valor");
+		miQuery.setParameter("valor", ced);
 		
 		 g=(Doctor) miQuery.getSingleResult();
 	}catch(NoResultException e) {
-		LOG.error("No existe un resultado para: "+apell,e);
+		LOG.error("No existe un resultado para: "+ced,e);
 	}	
 		return g;
 	}

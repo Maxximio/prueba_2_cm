@@ -43,15 +43,15 @@ public class PacienteRepoImpl implements IPacienteRepo{
 	}
 
 	@Override
-	public Paciente buscarPacienteCodSeguro(String codigoIess) {
+	public Paciente buscarPacienteCedula(String ced) {
 		Paciente g=null;
 		try {
-		Query miQuery= this.entityManager.createQuery("select p from Paciente p where p.codigoIess=:valor");
-		miQuery.setParameter("valor", codigoIess);
+		Query miQuery= this.entityManager.createQuery("select p from Paciente p where p.cedula =:valor");
+		miQuery.setParameter("valor",ced);
 		
 		 g=(Paciente) miQuery.getSingleResult();
 	}catch(NoResultException e) {
-		LOG.error("No existe un resultado para: "+codigoIess,e);
+		LOG.error("No existe un resultado para: "+ced ,e);
 	}	
 		return g;
 	}

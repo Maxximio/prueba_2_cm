@@ -12,6 +12,6 @@ public interface IPacienteRepo {
 	
 	void borrarDoctor(Integer id);
 	
-	Paciente buscarPacienteCodSeguro(String codigoIess);
+	Paciente buscarPacienteCedula(String ced);
 	
 }

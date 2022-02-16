@@ -16,4 +16,6 @@ public interface ICitaRepo {
 	
 	void borrarCitaMedica(Integer id);
 	
+	CitaMedica buscarPorNumero(Integer num);
+	
 }

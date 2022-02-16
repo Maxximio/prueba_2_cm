@@ -33,8 +33,8 @@ public class DoctorServiceImpl implements IDoctorService{
 	}
 
 	@Override
-	public Doctor buscarDoctorApellidoService(String apell) {
-		return this.docRepo.buscarDoctorApellido(apell);
+	public Doctor buscarDoctorCedulaService(String apell) {
+		return this.docRepo.buscarDoctorCedula(apell);
 	}
 	
 }

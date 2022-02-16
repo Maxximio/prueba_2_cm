@@ -29,13 +29,18 @@ public class CitaServiceImpl implements ICitaService{
 	}
 
 	@Override
-	public void ActualizarCitaMedicaService(CitaMedica cita) {
-		this.citaRepo.ActualizarCitaMedica(cita);
+	public void borrarCitaMedicaService(Integer id) {
+		this.citaRepo.borrarCitaMedica(id);
 	}
 
 	@Override
-	public void borrarCitaMedicaService(Integer id) {
-		this.citaRepo.borrarCitaMedica(id);
+	public CitaMedica buscarPorNumeroService(Integer num) {
+		return this.citaRepo.buscarPorNumero(num);
+	}
+
+	@Override
+	public void ActualizarCitaMedicaService(CitaMedica cita) {
+		this.citaRepo.ActualizarCitaMedica(cita);
 	}
 	
 }
