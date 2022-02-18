@@ -139,7 +139,7 @@ public class CitaMedica {
 	@Override
 	public String toString() {
 		return "CitaMedica [id=" + id + ", numero=" + numero + ", fechaCita=" + fechaCita + ", valorCita=" + valorCita
-				+ ", lugarCita=" + lugarCita + ", diagnostico=" + diagnostico + ", receta=" + receta + ", fechaControl="
+				+  ", fechaControl="
 				+ fechaControl + "]";
 	}
 	

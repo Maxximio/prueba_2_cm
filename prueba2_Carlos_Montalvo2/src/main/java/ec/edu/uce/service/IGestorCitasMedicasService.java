@@ -2,6 +2,7 @@ package ec.edu.uce.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import ec.edu.uce.modelo.jpa.CitaMedica;
 import ec.edu.uce.modelo.jpa.CitaSimple;
@@ -29,5 +30,7 @@ public interface IGestorCitasMedicasService {
 	void AgendarCita(Integer num,LocalDateTime fecha,BigDecimal valor, String lugar,String cedulaDoctor, String cedulaPaciente);
 	
 	void ActualizarCitas(Integer numero,String diagnostico,String receta,LocalDateTime fechaProx);
+
+	List <CitaMedica> ReporteCitas(LocalDateTime fechaMin, BigDecimal bigDecimal);
 	
 }

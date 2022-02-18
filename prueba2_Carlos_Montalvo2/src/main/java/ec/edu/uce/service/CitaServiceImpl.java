@@ -1,5 +1,9 @@
 package ec.edu.uce.service;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +45,12 @@ public class CitaServiceImpl implements ICitaService{
 	@Override
 	public void ActualizarCitaMedicaService(CitaMedica cita) {
 		this.citaRepo.ActualizarCitaMedica(cita);
+	}
+
+	@Override
+	public List<CitaMedica> ReporteCitasService(LocalDateTime fechaMin, BigDecimal bigDecimal) {
+		// TODO Auto-generated method stub
+		return this.citaRepo.ReporteCitas(fechaMin, bigDecimal);
 	}
 	
 }

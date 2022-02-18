@@ -86,9 +86,19 @@ public class Application implements CommandLineRunner{
 		//gestorService.ingresarPaciente(pac2);////////insertando pacientes
 		//gestorService.ingresarPaciente(pac1);
 		
-		gestorService.AgendarCita(1234, mifecha4, new BigDecimal(20.50), "Clinica Quito", "23452352", "4564546456");
+		//gestorService.AgendarCita(1234, mifecha4, new BigDecimal(20.50), "Clinica Quito", "23452352", "4564546456");
 		
-		gestorService.ActualizarCitas(1234, "dolor de pancreas", "2 miligramos de descanzo", mifecha4);
+		//gestorService.ActualizarCitas(1234, "dolor de pancreas", "2 miligramos de descanzo", mifecha4);
+		
+		LocalDateTime fechaMin=LocalDateTime.of(1990, Month.JULY,7,4,15);
+		//LOG.info("Imprimiendo reporte: "+gestorService.ReporteCitas(fechaMin,new BigDecimal(20.50)));
+		
+		List <CitaMedica> listaC =this.gestorService.ReporteCitas(fechaMin,new BigDecimal(20.50));
+		LOG.info("Longitud"+listaC.size());
+		for(CitaMedica cita: listaC) {
+			LOG.info("Imprimiendo reporte: "+cita.toString());
+		}
+		
 		
 	}
 

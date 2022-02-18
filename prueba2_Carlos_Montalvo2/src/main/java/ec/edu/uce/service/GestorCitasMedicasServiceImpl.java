@@ -3,6 +3,7 @@ package ec.edu.uce.service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -100,6 +101,11 @@ public class GestorCitasMedicasServiceImpl implements IGestorCitasMedicasService
 		cit.setFechaControl(fechaProx);
 		
 		this.citaService.ActualizarCitaMedicaService(cit);
+	}
+
+	@Override
+	public List<CitaMedica> ReporteCitas(LocalDateTime fechaMin, BigDecimal bigDecimal) {
+		return this.citaService.ReporteCitasService(fechaMin, bigDecimal);
 	}
 
 }

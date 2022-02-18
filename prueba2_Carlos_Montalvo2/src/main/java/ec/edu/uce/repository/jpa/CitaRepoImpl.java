@@ -1,9 +1,18 @@
 package ec.edu.uce.repository.jpa;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.apache.logging.log4j.LogManager;
@@ -61,6 +70,24 @@ public class CitaRepoImpl implements ICitaRepo{
 		LOG.error("No existe un resultado para: "+num,e);
 	}	
 		return g;
+	}
+
+	@Override
+	public List<CitaMedica> ReporteCitas(LocalDateTime fechaMin, BigDecimal bigDecimal) {
+		CriteriaBuilder myCriteria=this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<CitaMedica> myQuery=myCriteria.createQuery(CitaMedica.class);
+		
+		Root<CitaMedica>myTabla=myQuery.from(CitaMedica.class);
+		
+		Predicate p1=myCriteria.equal(myTabla.get("fechaCita"),fechaMin);
+		Predicate p2=myCriteria.equal(myTabla.get("valorCita"),bigDecimal);
+		Predicate and=myCriteria.or(p1,p2);
+		
+		myQuery.select(myTabla).where(and);
+			
+		TypedQuery<CitaMedica> typedQuery=this.entityManager.createQuery(myQuery);
+		
+		return typedQuery.getResultList();
 	}
 
 	
